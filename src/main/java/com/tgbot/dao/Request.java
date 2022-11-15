@@ -1,4 +1,4 @@
 package com.tgbot.dao;
 
-public record Request(String someMessage) {
+public record Request(String message) {
 }
