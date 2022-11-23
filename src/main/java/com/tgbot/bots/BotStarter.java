@@ -1,5 +1,5 @@
 package com.tgbot.bots;
 
-public interface BotStart {
+public interface BotStarter {
     void start();
 }

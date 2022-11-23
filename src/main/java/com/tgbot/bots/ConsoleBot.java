@@ -11,7 +11,7 @@ import com.tgbot.readers.RequestReader;
 import com.tgbot.repliers.ConsoleResponseReplier;
 import com.tgbot.repliers.ResponseReplier;
 
-public class ConsoleBot implements BotStart {
+public class ConsoleBot implements BotStarter {
     private final RequestReader reader = new ConsoleRequestReader();
     private final ResponseReplier replier = new ConsoleResponseReplier();
     private final RequestHandler requestHandler = new SimpleRequestHandler();
