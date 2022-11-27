@@ -1,14 +1,14 @@
 package com.tgbot;
 
 import com.tgbot.bots.ConsoleBot;
-import com.tgbot.bots.TelegramBot;
+import com.tgbot.bots.TelegramBotStarter;
 
 public class Main {
     public static void main(String[] args) {
         //ConsoleBot consoleBot = new ConsoleBot();
         //consoleBot.start();
 
-        TelegramBot telegramBot = new TelegramBot();
-        telegramBot.start();
+        TelegramBotStarter telegramBotStarter = new TelegramBotStarter();
+        telegramBotStarter.start();
     }
 }

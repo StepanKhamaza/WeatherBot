@@ -7,5 +7,5 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 public interface Converter {
     Request convertMessageToRequest(Message message);
-    Message convertResponseToMessage(Response response);
+    SendMessage convertResponseToMessage(Response response);
 }

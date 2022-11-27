@@ -1,4 +1,6 @@
 package com.tgbot.dao;
 
-public record Request(String message) {
+import org.telegram.telegrambots.meta.api.objects.Message;
+
+public record Request(Message message) {
 }

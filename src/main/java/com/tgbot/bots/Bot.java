@@ -5,14 +5,13 @@ import com.tgbot.dao.Response;
 import com.tgbot.handlers.MessageConverter;
 import com.tgbot.handlers.RequestHandler;
 import com.tgbot.handlers.SimpleRequestHandler;
-import jdk.jshell.Snippet;
+import org.apache.log4j.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class Bot extends TelegramLongPollingBot {
+    private final static Logger logger = Logger.getLogger(Bot.class);
     private final String botName;
     private final String botToken;
     private final RequestHandler requestHandler = new SimpleRequestHandler();
@@ -37,22 +36,12 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         Request request = messageConverter.convertMessageToRequest(update.getMessage());
         Response response = requestHandler.handle(request);
-        Message message = messageConverter.convertResponseToMessage(response);
-        SendMessage sendMessage = getSendMessage(update.getMessage().getChatId(), message);
+        SendMessage sendMessage = messageConverter.convertResponseToMessage(response);
 
         try {
             execute(sendMessage);
-        } catch (TelegramApiException e) {
-            mock(e);
+        } catch (Exception e) {
+            logger.error("Error sending message", e);
         }
-    }
-    private void mock(Exception e) {
-        // something is logged
-    }
-    private SendMessage getSendMessage(Long chatId, Message message) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatId);
-        sendMessage.setText(message.getText());
-        return sendMessage;
     }
 }

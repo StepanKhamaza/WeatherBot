@@ -1,0 +1,10 @@
+2022-11-27 13:47:00 ERROR Bot:43 - Error sending message
+   java.lang.NullPointerException: Cannot invoke "String.isEmpty()" because "this.chatId" is null
+	at org.telegram.telegrambots.meta.api.methods.send.SendMessage.validate(SendMessage.java:127)
+	at org.telegram.telegrambots.bots.DefaultAbsSender.sendMethodRequest(DefaultAbsSender.java:1070)
+	at org.telegram.telegrambots.bots.DefaultAbsSender.sendApiMethod(DefaultAbsSender.java:1044)
+	at org.telegram.telegrambots.meta.bots.AbsSender.execute(AbsSender.java:64)
+	at com.tgbot.bots.Bot.onUpdateReceived(Bot.java:41)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27)
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:317)
