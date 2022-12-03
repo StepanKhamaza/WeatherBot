@@ -1,5 +1,7 @@
 package com.tgbot.bots;
 
+import com.tgbot.command.Command;
+import com.tgbot.command.CommandManager;
 import com.tgbot.dao.Request;
 import com.tgbot.dao.Response;
 import com.tgbot.handlers.MessageConverter;
@@ -16,6 +18,7 @@ public class Bot extends TelegramLongPollingBot {
     private final String botToken;
     private final RequestHandler requestHandler = new SimpleRequestHandler();
     private final MessageConverter messageConverter = new MessageConverter();
+    private final Command commandManager = new CommandManager();
 
     public Bot(String botName, String botToken) {
         this.botName = botName;
@@ -35,7 +38,9 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         Request request = messageConverter.convertMessageToRequest(update.getMessage());
-        Response response = requestHandler.handle(request);
+        Response response = commandManager.handle(request);
+        if (response == null)
+            response = requestHandler.handle(request);
         SendMessage sendMessage = messageConverter.convertResponseToMessage(response);
 
         try {
