@@ -1,6 +1,7 @@
 package com.tgbot.bots;
 
 import com.tgbot.command.Command;
+import com.tgbot.command.CommandList;
 import com.tgbot.command.CommandManager;
 import com.tgbot.dao.Request;
 import com.tgbot.dao.Response;
@@ -18,7 +19,7 @@ public class Bot extends TelegramLongPollingBot {
     private final String botToken;
     private final RequestHandler requestHandler = new SimpleRequestHandler();
     private final MessageConverter messageConverter = new MessageConverter();
-    private final Command commandManager = new CommandManager();
+    private final Command commandManager = new CommandManager(new CommandList().getCommands());
 
     public Bot(String botName, String botToken) {
         this.botName = botName;
