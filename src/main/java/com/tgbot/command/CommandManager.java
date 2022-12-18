@@ -4,25 +4,21 @@ import com.tgbot.dao.Request;
 import com.tgbot.dao.Response;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CommandManager implements Command {
-    private Map<String, Command> commands = new HashMap<>();
+    private final Map<String, Command> commands;
     public CommandManager(List<Command> list) {
         commands = list.stream()
                 .collect(Collectors.toMap(Command::getName, Function.identity()));
     }
-
     @Override
     public String getName() {
         return null;
     }
-
     @Override
     public Response handle(Request request) {
         Message message = request.message();
