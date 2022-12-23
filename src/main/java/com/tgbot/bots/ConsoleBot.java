@@ -16,7 +16,6 @@ public class ConsoleBot implements BotStarter {
     private final ResponseReplier replier = new ConsoleResponseReplier();
     private final RequestHandler requestHandler = new SimpleRequestHandler();
     private final StopHandler stopHandler = new KeywordStopHandler("exit");
-
     @Override
     public void start() {
         while(true) {

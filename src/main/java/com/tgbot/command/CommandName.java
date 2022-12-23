@@ -1,7 +1,8 @@
 package com.tgbot.command;
 
 public enum CommandName {
-    START("/start", "Enter the name of the city"),
+    START("/start", "Click on City button\n" +
+            "Or if you have already selected a city on the Weather button"),
     SETTINGS("/settings", "Select settings"),
     INFO("/info", "Your current settings"),
     HELP("/help", "Command /start to get started\n" +
