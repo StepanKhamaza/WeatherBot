@@ -12,24 +12,24 @@ public class JsonParser {
     public JsonParser() {}
     public String getData(String doc) {
         try {
-            String result = "";
+            StringBuilder result = new StringBuilder();
             JSONObject jsonObject = (JSONObject) new JSONParser().parse(doc);
             JSONObject main = (JSONObject) jsonObject.get("main");
             JSONObject wind = (JSONObject) jsonObject.get("wind");
 
-            Double degrees = Double.parseDouble(main.get("temp").toString()) - 273.15;
-            Double feelsLike = Double.parseDouble(main.get("feels_like").toString()) - 273.15;
-            Double humidity = Double.parseDouble(main.get("humidity").toString());
-            Double windSpeed = Double.parseDouble(wind.get("speed").toString());
+            float degrees = Float.parseFloat(main.get("temp").toString()) - 273.15f;
+            float feelsLike = Float.parseFloat(main.get("feels_like").toString()) - 273.15f;
+            float humidity = Float.parseFloat(main.get("humidity").toString());
+            float windSpeed = Float.parseFloat(wind.get("speed").toString());
             String city = (String) jsonObject.get("name");
 
-            result += city + " " + getDate() + '\n';
-            result += "Temperature: <b><i> %s°C\n</i></b>".formatted(String.format("%.0f", degrees));
-            result += "Feels like: <b><i>%s°C\n</i></b>".formatted(String.format("%.0f", feelsLike));
-            result += "Humidity: <b><i>%s%s\n</i></b>".formatted(String.format("%.0f", humidity), "%");
-            result += "Wind speed: <b><i>%sm\\s\n</i></b>".formatted(String.format("%.0f", windSpeed));
+            result.append(city).append(" ").append(getDate()).append("\n");
+            result.append("Temperature: <b><i>").append(String.format("%.0f", degrees)).append("°C\n</i></b>");
+            result.append("Feels like: <b><i>").append(String.format("%.0f", feelsLike)).append("°C\n</i></b>");
+            result.append("Humidity: <b><i>").append(String.format("%.0f", humidity)).append("%").append("\n</i></b>");
+            result.append("Wind speed: <b><i>").append(String.format("%.0f", windSpeed)).append("m\\s\n</i></b>");
 
-            return result;
+            return new String(result);
         } catch (ParseException e) {
             logger.error("Parsing error", e);
         }
